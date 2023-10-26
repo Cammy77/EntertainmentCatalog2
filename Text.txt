@@ -1,0 +1,4 @@
+I created a project called EntertainmentCatalog in Eclipse and synced it with the EntertainmentRepository2. 
+It has been declared as a Spring Starter Project. 
+I gave it Lombok, mySQL Driver, Spring Boot DevTools, Spring Data JPA, Spring Web, and Tymeleaf dependencies.
+If I've made an oversight in creating the project, I might have to start over.
