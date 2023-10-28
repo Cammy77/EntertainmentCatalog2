@@ -8,3 +8,4 @@ package container.beans;
 public class Dummy {
 
 }
+TEST
