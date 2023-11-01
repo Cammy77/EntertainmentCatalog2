@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert New Actor</title>
+</head>
+<body>
+<form th:action="@{/actorInput}" th:object="${actor}" method="post">
+    Name: <input type="text" th:field="*{name}"><br/>
+    Age: <input type="number" th:field="*{age}"><br/>
+    <input type="submit" value="Submit">
+</form>
+<a href="/index.html">Home</a>
+</body>
+</html>

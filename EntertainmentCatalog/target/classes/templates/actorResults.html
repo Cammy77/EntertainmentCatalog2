@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Actors</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="actor : ${actors}">
+        <td th:text="${actor.id}"></td>
+        <td th:text="${actor.name}"></td>
+        <td th:text="${actor.age}"></td>
+    </tr>
+    </tbody>
+</table>
+<a href="/actorInput">Add a new Actor/Actress</a>
+<a href="/index.html">Home</a>
+</body>
+</html>
