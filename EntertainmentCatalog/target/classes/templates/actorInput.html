@@ -5,11 +5,12 @@
     <title>Insert New Actor</title>
 </head>
 <body>
-<form th:action="@{/actorInput}" th:object="${actor}" method="post">
+<form th:object="${newActor}" th:action="@{/actorInput}" method="POST">
     Name: <input type="text" th:field="*{name}"><br/>
     Age: <input type="number" th:field="*{age}"><br/>
     <input type="submit" value="Submit">
 </form>
-<a href="/index.html">Home</a>
+<a href="viewAllActors">View all Actors</a>
+<a href="index.html">Home</a>
 </body>
 </html>
