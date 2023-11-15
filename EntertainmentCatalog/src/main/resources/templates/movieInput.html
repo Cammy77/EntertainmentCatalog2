@@ -5,12 +5,13 @@
     <title>Insert New Movie</title>
 </head>
 <body>
-<form th:action="@{/movieInput}" th:object="${movie}" method="post">
+<form th:action="@{/movieInput}" th:object="${newMovie}" method="post">
     Name: <input type="text" th:field="*{name}"><br/>
     Genre: <input type="text" th:field="*{genre}"><br/>
     Release Date: <input type="date" th:field="*{releaseDate}"><br/>
     <input type="submit" value="Submit">
 </form>
+<a href="viewAllMovies">View all Movies</a>
 <a href="/index.html">Home</a>
 </body>
 </html>

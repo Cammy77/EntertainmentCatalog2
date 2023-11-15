@@ -10,48 +10,55 @@ import dmacc.repository.MovieRepository;
 
 @Controller
 public class MovieController {
-    
-    @Autowired
-    private MovieRepository movieRepo;
 
-    @GetMapping("/viewAllMovies")
-    public String viewAllMovies(Model model) {
-        model.addAttribute("movies", movieRepo.findAll());
-        return "movieResults";
-    }
+	@Autowired
+	private MovieRepository movieRepo;
 
-    @GetMapping("/inputMovie")
-    public String addNewMovie(Model model) {
-        Movie m = new Movie();
-        model.addAttribute("newMovie", m);
-        return "inputMovie";
-    }
+	@GetMapping("/viewAllMovies")
+	public String viewAllMovies(Model model) {
+		return populateMoviesView(model);
+	}
 
-    @PostMapping("/inputMovie")
-    public String addNewMovie(@ModelAttribute Movie m, Model model) {
-        movieRepo.save(m);
-        return "redirect:/viewAllMovies";
-    }
+	@GetMapping("/movieInput")
+	public String addNewMovie(Model model) {
+		Movie m = new Movie();
+		model.addAttribute("newMovie", m);
+		return "movieInput";
+	}
 
-    @GetMapping("/editMovie/{id}")
-    public String editMovie(@PathVariable("id") long id, Model model) {
-        Movie m = movieRepo.findById(id).orElse(null);
-        model.addAttribute("newMovie", m);
-        return "inputMovie";
-    }
+	@PostMapping("/movieInput")
+	public String addNewMovie(@ModelAttribute Movie m, Model model) {
+		movieRepo.save(m);
+		return populateMoviesView(model);
+	}
 
-    @PostMapping("/updateMovie/{id}")
-    public String updateMovie(@PathVariable("id") long id, @ModelAttribute Movie m, Model model) {
-        movieRepo.save(m);
-        return "redirect:/viewAllMovies";
-    }
+	@GetMapping("/editMovie/{id}")
+	public String editMovie(@PathVariable("id") long id, Model model) {
+		Movie m = movieRepo.findById(id).orElse(null);
+		model.addAttribute("newMovie", m);
+		return "movieInput";
+	}
 
-    @GetMapping("/deleteMovie/{id}")
-    public String deleteMovie(@PathVariable("id") long id, Model model) {
-        Movie m = movieRepo.findById(id).orElse(null);
-        if (m != null) {
-            movieRepo.delete(m);
-        }
-        return "redirect:/viewAllMovies";
-    }
+	@PostMapping("/updateMovie/{id}")
+	public String updateMovie(@PathVariable("id") long id, @ModelAttribute Movie m, Model model) {
+		movieRepo.save(m);
+		return populateMoviesView(model);
+	}
+
+	@GetMapping("/deleteMovie/{id}")
+	public String deleteMovie(@PathVariable("id") long id, Model model) {
+		Movie m = movieRepo.findById(id).orElse(null);
+		if (m != null) {
+			movieRepo.delete(m);
+		}
+		return populateMoviesView(model);
+	}
+
+	private String populateMoviesView(Model model) {
+		if (movieRepo.findAll().isEmpty()) {
+			return addNewMovie(model);
+		}
+		model.addAttribute("movies", movieRepo.findAll());
+		return "movieResults";
+	}
 }
